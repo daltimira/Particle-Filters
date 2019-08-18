@@ -29,3 +29,4 @@ echo
 echo Please verify your credentials:
 echo username: `git config user.name`
 echo email: `git config user.email`
+
