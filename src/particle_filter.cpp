@@ -183,7 +183,30 @@ void ParticleFilter::resample() {
    *   http://en.cppreference.com/w/cpp/numeric/random/discrete_distribution
    */
 
-  //Get weights and max weight.
+  // First let's guess a index uniformally [1,N]
+  std::uniform_int_distribution<int>uniformDistributionInteger(0, num_particles - 1);
+  std::uniform_real_distribution<double>uniformDistributionReal(0, 1);
+  int index = uniformDistributionInteger(gen);
+  double beta = 0;
+  double maxW = 0;
+  // get the max weight
+  for (int iParticle = 0; iParticle < num_particles; iParticle++) {
+    if (particles[iParticle].weight > maxW) {
+      maxW = particles[iParticle].weight;
+    }
+  }
+
+  std::vector<Particle> newSetParticles;
+  for (int i = 0; i<num_particles; i++) {
+    beta += uniformDistributionReal(gen)*2.0*maxW;
+    while (beta > particles[index].weight) {
+      beta -= particles[index].weight;
+      index = (index + 1) % num_particles;
+    }
+    newSetParticles.push_back(particles[index]);
+  }
+
+  particles = newSetParticles;
 }
 
 void ParticleFilter::SetAssociations(Particle& particle, 
