@@ -13,6 +13,8 @@
 #include <vector>
 #include "helper_functions.h"
 
+#define TOLERANCE 0.00000001
+
 struct Particle {
   int id;
   double x;

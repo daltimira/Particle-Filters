@@ -248,4 +248,14 @@ inline bool read_landmark_data(std::string filename,
   return true;
 }
 
+/**
+ * Calculates a multivariate gaussian probability density function
+ * 
+ */
+
+inline double multivariateGaussianProbability(double x, double y, double mu_x, double mu_y, double stdx, double stdy) 
+{
+  return (1.0/(2*M_PI*stdx*stdy))*exp(-(((x-mu_x)*(x-mu_x))/(2*stdx*stdx)+((y-mu_y)*(y-mu_y))/(2*stdy*stdy)));
+}
+
 #endif  // HELPER_FUNCTIONS_H_
