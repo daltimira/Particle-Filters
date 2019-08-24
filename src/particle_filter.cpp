@@ -165,7 +165,6 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
           break;
         }
       }
-      // we put the observation measurement in global coordinates
       double prob = multivariateGaussianProbability(observationsMapSpace[iObservation].x, observationsMapSpace[iObservation].y, x_pred, y_pred, std_landmark[0], std_landmark[1]);
       if (prob == 0.0) {
         prob = 0.00000000001;
